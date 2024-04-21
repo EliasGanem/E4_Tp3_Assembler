@@ -151,11 +151,10 @@ F:
     cmp r2,#0
     bls G
 
-    add r4,#1
-    posicion_maximo(r4,r3) /* devuelve en r0*/
+    add r0,r4,#1 /* en r0 va k+1 y en r1 va b q está ahi siempre*/
+    bl posicion_maximo /* devuelve en r0*/
     mov r5,r0
 
-    sub r4,#1
     ldr r6,[r3,r4,lsl#2]
 
     ldr r7,[r3,r5,lsl#2] /* llevo a un auxiliar bj */
@@ -166,7 +165,6 @@ F:
     sub r4,#1
 
     bal F
-
 
 G:
     pop {r4-r11,pc}
