@@ -93,9 +93,32 @@ endfun sumatoria
  */
 defun posicion_maximo
     push {r4-r11,lr}
-    // Insertar código a continuación
 
-    // Retorno, antes R0 debe tener el valor correcto
+    mov r2,r0 /*n=r2*/
+    mov r3,r1 /*b=r3*/
+    
+    mov r4,#0
+
+    cmp r2,#1 /*comparo n con 1*/
+    bls E /*n<=1 entonces salta a B q retorna k=r4*/
+    ldr r5,[r3,r4,lsl#2]
+    mov r6,#1
+D:
+    cmp r6,r2
+    bhs E
+    ldr r7,[r3,r6,lsl#2]
+    cmp r5,r7
+    bge C
+    
+    mov r5,r7
+    mov r4,r6
+
+C:
+    add r6,#1
+    bal D
+
+E:
+    mov r0,r4
     pop {r4-r11,pc}
 endfun posicion_maximo
 
