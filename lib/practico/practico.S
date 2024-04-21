@@ -141,8 +141,33 @@ endfun posicion_maximo
  */
 defun ordenar_en_sitio_menor_a_mayor
     push {r4-r11,lr}
-    // Insertar código a continuación
+    
+    mov r2,r0 /* saco de r0 xq despues se usa ro en la subrutina*/
+    mov r3,r1
 
-    // Retorno
+    sub r4,r2,#1
+
+F:
+    cmp r2,#0
+    bls G
+
+    add r4,#1
+    posicion_maximo(r4,r3) /* devuelve en r0*/
+    mov r5,r0
+
+    sub r4,#1
+    ldr r6,[r3,r4,lsl#2]
+
+    ldr r7,[r3,r5,lsl#2] /* llevo a un auxiliar bj */
+    str r7,[r3,r4,lsl#2] /* llevo a auxiliar a bk */
+
+    str r6,[r3,r5,lsl#2]
+
+    sub r4,#1
+
+    bal F
+
+
+G:
     pop {r4-r11,pc}
 endfun ordenar_en_sitio_menor_a_mayor
